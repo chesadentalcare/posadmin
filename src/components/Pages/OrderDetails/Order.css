@@ -1,0 +1,620 @@
+.sales-dashboard {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+.sales-dashboard.sidebar-closed {
+  margin-left: 0px;
+  width: calc(100% - 0%);
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Added transition for width */
+}
+
+.sales-dashboard.sidebar-open {
+    margin-left: 243px;
+    width: calc(100% - 250px);
+    overflow: auto;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.main-content {
+  padding: 20px;
+  margin-left: 1px; /* Adjust according to sidebar width */
+  overflow: auto;
+  transition: margin-left 0.3s ease; /* Added transition for margin-left */
+}
+
+.sales-dashboard.sidebar-open .main-content{
+  margin-left: 0;
+  width: calc(100% - 6px);
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease;
+
+}
+
+.sales-dashboard.sidebar-open .company-name1{
+  position: inherit;
+  height: 20px;
+  left: 18.5%;
+}
+
+.sales-dashboard.sidebar-closed .company-name1{
+  position: absolute;
+  height: 20px;
+  left: 5%;
+}
+
+
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Add space between items */
+  background-color: #f0eae3; /* Change background color */
+  color: #fff; /* Change text color */
+  padding-bottom: 20px;
+  border-bottom:  black  12px;
+  height: 50px;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.page-numbers {
+  display: inline-block;
+}
+
+.page-button {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+  padding: 10px 15px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.page-button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.entries-info{
+  position: relative;
+  top: -7%;
+  font-weight: 500;
+  /* font-family:'Courier New', Courier, monospace; */
+}
+.company-logo {
+  /* background-color: #ddd; */
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+.search-bar-container {
+  width: 20%;
+  left: 40vh; /* Adjust the value to move it to the left */
+  position: relative;
+  padding: 0px;
+  //border: 1px solid #ccc;
+  border-radius: 33px;
+  font-size: 14px;
+  /* transition: border-color 0.3s ease-in-out; */
+  height: 40px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader21 {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #514b82;
+  animation:
+    l20-1 0.8s infinite linear alternate,
+    l20-2 1.6s infinite linear;
+}
+@keyframes l20-1{
+   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+}
+@keyframes l20-2{ 
+  0%    {transform:scaleY(1)  rotate(0deg)}
+  49.99%{transform:scaleY(1)  rotate(135deg)}
+  50%   {transform:scaleY(-1) rotate(0deg)}
+  100%  {transform:scaleY(-1) rotate(-135deg)}
+}
+
+
+  
+.delivered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #4caf50; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 4px 8px; /* Adjust padding as needed */
+}
+
+
+.in-transit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0004ff56;
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  padding: 4px 8px; /* Adjust padding as needed */
+}
+
+.not-delivered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff000056;
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  padding: 4px 8px; /* Adjust padding as needed */
+  
+}
+
+
+.success-icon {
+  margin-right: 4px; /* Adjust icon spacing */
+}
+/* SalesDashboard.css */
+
+/* Add green box using ::before pseudo-element */
+td.order-status::before {
+content: "";
+display: inline-block;
+width: 10px; /* Adjust width of the box */
+height: 10px; /* Adjust height of the box */
+background-color: #4caf50; /* Green background color */
+border-radius: 50%; /* Create a circle */
+margin-right: 5px; /* Adjust margin between the box and text */
+}
+
+.company-name {
+  margin: 0;
+  font-size: 24px; /* Increase font size */
+}
+.company-name1 {
+  position: absolute;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  left: 40%;
+  color: black ;
+  /* background-color: #dfa672; */
+  margin: 0;
+  font-size: 34px; /* Increase font size */
+}
+
+.sidebar {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+
+.table-container {
+position: relative;
+}
+
+
+
+.clear-icon {
+position: absolute;
+right: 25px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
+color: #777;
+}
+
+.clear-icon:hover {
+color: #333;
+}
+
+
+.pagination {
+display: flex;
+justify-content: center;
+margin-top: 20px;
+}
+
+.pagination button {
+margin: 0 5px;
+}
+
+.bordered-table {
+  margin: 5px 5px 5px;
+}
+table {
+    width: 97%;
+    border-collapse: collapse;
+}
+
+
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.action-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-button:hover {
+  background-color: #0056b3; /* Darken color on hover */
+}
+
+
+/* CSS for status icons and colors */
+td.job-card-issued::before {
+content: "";
+display: inline-block;
+width: 10px; /* Adjust width of the box */
+height: 10px; /* Adjust height of the box */
+background-color: blue; /* Green background color */
+border-radius: 50%; /* Create a circle */
+margin-right: 5px;
+}
+
+.issued {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgb(233, 146, 32); /* Green background color */
+  color: #fff; /* White text color */
+  padding: 4px 8px;
+}
+
+.dispatched {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #e6750c; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 4px 8px; /* Adjust padding as needed */
+}
+
+.status-null {
+  display: flex;
+  align-items: center;
+  color: red;
+}
+
+.status-text {
+  margin-left: 5px;
+}
+
+
+
+
+.action-button1 {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  align-items: start;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 80px;
+  height: 40px;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+.action-icons2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-icon2 {
+  margin-bottom: 5px;
+}
+
+.action-icon2:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+
+.success-icon1 {
+  margin-right: 4px; /* Adjust icon spacing */
+}
+/* SalesDashboard.css */
+
+/* Add green box using ::before pseudo-element */
+td.order-status::before {
+content: "";
+display: inline-block;
+width: 10px; /* Adjust width of the box */
+height: 10px; /* Adjust height of the box */
+background-color: #4caf50; /* Green background color */
+border-radius: 50%; /* Create a circle */
+margin-right: 5px; /* Adjust margin between the box and text */
+}
+
+.dispatched {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #e6750c; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 4px 8px; /* Adjust padding as needed */
+}
+
+
+.issued1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #cb2cf3; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 4px 8px; /* Adjust padding as needed */
+}
+
+
+
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px;
+    height: auto;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .header .logout-button {
+    font-size: 14px;
+  }
+
+  .pagination {
+    margin-top: 5px;
+  }
+
+  .pagination-button {
+    padding: 8px 16px;
+  }
+
+  .page-button {
+    padding: 8px 12px;
+    margin: 0 1px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .header .logout-button {
+    font-size: 18px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .header {
+    padding: 20px;
+    height: 60px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .header .logout-button {
+    font-size: 20px;
+  }
+}
+
+
+
+.card-bordered {
+    border: 1px solid #dbdfea;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-body h5 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.card-body h6 {
+    font-size: 35px;
+    color: #007bff;
+    margin: 15px 0;
+}
+
+.card-body p {
+    margin: 10px 0;
+}
+
+.card-body b {
+    color: #ffa353;
+}
+
+.card-body hr {
+    margin: 20px 0;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#generate_report {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#generate_report:hover {
+    background-color: #0056b3;
+}
+
+.col-md-3 {
+          width: 24%;
+		  padding: 5px;
+    }
+	.col-md-6 {
+          width: 50%;
+		  padding: 5px;
+    }
+	.col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+	
+	.col-md-4 {
+          width: 32%;
+		  padding:3px;
+    }
+@media (max-width: 767.98px) {
+    .col-md-3, .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .col-md-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+@media (min-width: 1200px) {
+    .col-md-3 {
+        flex: 0 0 24%;
+        max-width: 24%;
+    }
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -14px;
+    margin-left: -14px;
+}

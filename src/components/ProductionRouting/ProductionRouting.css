@@ -1,0 +1,93 @@
+.production-routing-container {
+    position: relative;
+    left: 17%;
+    top: 10vh;
+    width: 76%;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+  }
+
+
+  .hi {
+    position: relative;
+    left: -52%;
+    top: -37.6vh;
+    width: 200%;
+    text-align: center;
+    padding: 20px;
+    color: #fff; /* Set text color to white */
+    background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXMxMTMtYWstNTcxNl8zLmpwZw.jpg'); /* Use a smoke image or replace 'smoke.jpg' with your desired background */
+    background-blend-mode: overlay; /* Blend the background image with the gradient */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  
+  .consumption-container {
+    position: relative;
+    top: -13vh;
+  }
+  
+  input[type='text'],
+  input[type='number'] {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 40%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-button,
+  .post-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover,
+  .post-button:hover {
+    background-color: #0056b3;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+
+  
+
+  .option-checkbox {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .option-checkbox.selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .check-icon {
+    margin-right: 5px;
+  }
+  
+  .options-container {
+    margin-bottom: 20px;
+  }
+  

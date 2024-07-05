@@ -1,0 +1,189 @@
+/* Sidebar Styles */
+.sidebar1 {
+  background-color: #101924;
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  z-index: 999;
+}
+
+
+.sidebar1.closed {
+  width: 0px;
+}
+
+.sidebar-header2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.company-logo1 {
+  width: 150px;
+  height: 100px;
+  /* margin-left:11px;/ */
+}
+
+.company-name {
+  color: #ffa353;
+  font-size: 24px;
+  text-align: center;
+}
+
+.sidebar-options1 {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-option1 {
+  padding: 15px 20px;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Remove underline */
+  margin-bottom: 10px; /* Add some spacing between options */
+}
+
+.sidebar-option1:hover {
+  background-color: #2b3b4e;
+  border-radius: 50px;
+}
+
+.sidebar-option1.active {
+  background-color: #2b3b4e; /* Change background color of active route */
+  border-radius: 50px;
+}
+
+.icon {
+  color: #ffa353;
+  margin-right: 10px;
+}
+
+.text {
+  color: #bfb1ae;
+  font-size: 17px;
+}
+
+.logout {
+  position: absolute;
+  top: 76%;
+  left: 49px; /* Adjust the distance from the left */
+  display: block;
+  padding: 15px 20px;
+  background-color: #ffa353;
+  color: #000000;
+  text-decoration: none;
+  text-align: start;
+  transition: background-color 0.3s ease;
+  border-radius: 50px;
+}
+
+.logout:hover {
+  background-color: #101924;
+  color: #ffa353;
+}
+
+/* Media Query for Responsive Design - Tablet */
+@media (max-width: 1024px) {
+  .sidebar1 {
+    width: 200px; /* Adjust width for tablets */
+  }
+}
+
+/* Media Query for Responsive Design - Mobile */
+@media (max-width: 768px) {
+  .sidebar1 {
+    width: 20%; /* Occupy full width */
+    padding-top: 60px; /* Adjust padding to accommodate header */
+  }
+
+  .company-logo1 {
+    width: 120px; /* Adjust logo size */
+    height: 80px;
+  }
+
+  .company-name {
+    font-size: 20px; /* Adjust font size */
+  }
+
+  .sidebar-option1 {
+    padding: 12px 16px; /* Adjust option padding */
+  }
+
+  .logout {
+    left: 10px; /* Adjust logout button position */
+  }
+}
+
+
+.toggle-button {
+  position: fixed;
+  bottom: 85%;
+  left: 2%;
+  transform: translateX(-50%);
+  background-color: #e69f1d;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  z-index: 999;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #bdc3c7;
+}
+
+.toggle-button:active {
+  transform: scale(0.95);
+}
+
+.toggle-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-footer {
+  position: absolute;
+  text-align: center;
+  height: 70px;
+  bottom: 0;
+  width: 99%;
+  text-align: center;
+  /* padding: 19px; */
+  padding-bottom: 18px;
+  /* padding-left: 2px; */
+  background-color: #2c3e50;
+  color: wheat;
+}
+
+/* Smooth transition effect */
+.sidebar1.open .toggle-button {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+
+.sidebar1.closed .toggle-button {
+  transform: translateX(-50%) rotate(180deg);
+  position: absolute;
+
+  left: 40%;
+}
+
+/* Hide text when sidebar is closed */
+.sidebar1.closed .text {
+  display: none;
+}
+
+/* Adjust icon spacing when sidebar is closed */
+.sidebar1.closed .icon {
+  margin-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
